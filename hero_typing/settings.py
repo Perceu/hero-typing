@@ -1,0 +1,12 @@
+# Size
+HEIGHT, WIDTH = 800, 800
+
+#Colors
+C_GREEN = (15,250,15)
+C_WHITE = (255,255,255)
+C_YELLOW = (255,255,0)
+C_BLACK = (0,0,0)
+C_RED = (255,0,0)
+
+#Settings
+START_LIFES = 6
