@@ -20,5 +20,5 @@ class GameOver():
         img = self.font.render("GAME OVER", True, C_RED)
         self.screen.blit(img, ((WIDTH/2)-(img.get_width()/2), (HEIGHT/2)-img.get_height()))
         
-        img_white_2 = self.font.render("[R]einiciar ou [S]air", True, C_WHITE)
-        self.screen.blit(img_white_2, ((WIDTH/2)-(img_white_2.get_width()/2), HEIGHT-300))
+        # img_white_2 = self.font.render("[R]einiciar ou [S]air", True, C_WHITE)
+        # self.screen.blit(img_white_2, ((WIDTH/2)-(img_white_2.get_width()/2), HEIGHT-300))
