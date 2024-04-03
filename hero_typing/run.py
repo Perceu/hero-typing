@@ -7,15 +7,17 @@ from elements.explosion import Explosion
 from elements.letter import LetterBox
 from elements.lifes import Lifes
 from scenes.game_over import GameOver
+from scenes.placar import Placar
 
 pygame.init()
 
 screen = pygame.display.set_mode((HEIGHT, WIDTH))
 clock = pygame.time.Clock()
+pygame.key.set_repeat(200, 25)
 points = 0
 damage = 0
 screen_shake = 0
-limit = 3
+limit = 5
 level = 1
 letters = []
 explosions = []
@@ -30,14 +32,22 @@ fonts = {
 
 game_loop = GameLoop()
 game_over = GameOver(screen, fonts['font_size_45'])
+placar = Placar(screen, fonts['font_size_30'])
 game_menu = Menu(fonts, game_loop)
-life_bar = Lifes(screen, START_LIFES)
+life_bar = Lifes(screen, 1)
 
 while game_loop.in_game:
     clock.tick(45)
-    for event in pygame.event.get():
+
+    events = pygame.event.get()
+    if game_loop.scene == 'game_over':
+        game_over.handle_event(events)
+
+    for event in events:
         game_loop.handle_event(event)
         game_menu.handle_event(event)
+        if game_loop.scene != 'main':
+            continue
         for index, letter in enumerate(letters):
             if event.type == pygame.KEYUP:
                 if event.key == letter.letter:
@@ -49,6 +59,8 @@ while game_loop.in_game:
        
     if game_loop.scene == 'menu':
         game_menu.draw(screen)
+    elif game_loop.scene == 'placar':
+        placar.draw()
     elif game_loop.scene == 'main':
         screen.fill(C_BLACK)
         cenario = pygame.Rect(100, 0, WIDTH-200, HEIGHT)

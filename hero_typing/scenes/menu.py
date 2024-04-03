@@ -7,8 +7,8 @@ class Menu:
     fonts = dict[str, SysFont]
     menu_itens = [
         {'text': 'Iniciar', 'active': True, 'scene': 'main'},
-        {'text': 'Placar', 'active': False, 'scene': 'main'},
-        {'text': 'Creditos', 'active': False, 'scene': 'main'},
+        {'text': 'Placar', 'active': False, 'scene': 'placar'},
+        {'text': 'Creditos', 'active': False, 'scene': 'game_over'},
         {'text': 'Sair', 'active': False, 'scene': 'quit'},
     ]
 

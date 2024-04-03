@@ -9,7 +9,7 @@ class LetterBox():
     letter = None
     x = 0
     y = 0
-    vel = 1
+    vel = 5
     def __init__(self, screen, letter, font, vel=1) -> None:
         self.screen = screen
         self.letter = letter
