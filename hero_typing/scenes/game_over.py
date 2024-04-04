@@ -27,17 +27,23 @@ class GameOver():
     def draw(self, points):
         self.points = points
         self.screen.fill(C_BLACK)
-
-        img_white = self.font.render("Sua Pontuação:", True, C_WHITE)
-        self.screen.blit(img_white, ((WIDTH/2)-(img_white.get_width()/2), HEIGHT-660))
-        
-        img_points = self.font.render(str(points).zfill(4), True, C_GREEN)
-        self.screen.blit(img_points, ((WIDTH/2)-(img_points.get_width()/2), HEIGHT-600))
+        center_width = int(WIDTH/2)
+        center_height = int(HEIGHT/2)
         
         img = self.font.render("GAME OVER", True, C_RED)
-        self.screen.blit(img, ((WIDTH/2)-(img.get_width()/2), (HEIGHT/2)-img.get_height()))
+        self.screen.blit(img, (center_width-(img.get_width()/2), center_height-img.get_height()))
+        
+        img = self.font.render("Pontuação", True, C_WHITE)
+        self.screen.blit(img, (center_width-(img.get_width()/2), center_height-img.get_height()-150))
+        
+        img = self.font.render(str(points).zfill(4), True, C_GREEN)
+        self.screen.blit(img, (center_width-(img.get_width()/2), center_height-img.get_height()-100))
+
         if self.show_input:
-            self.screen.blit(self.textinput.surface, ((WIDTH/2)-200, HEIGHT-300))
+            img = self.font.render("Digite seu nick:", True, C_WHITE)
+            self.screen.blit(img, (center_width-(img.get_width()/2), center_height-img.get_height()+100))
+            self.textinput.surface.get_width()
+            self.screen.blit(self.textinput.surface, (center_width-(self.textinput.surface.get_width()/2), center_height-self.textinput.surface.get_height()+200))
         else:
-            img_white_2 = self.font.render("[R]einiciar ou [S]air", True, C_WHITE)
-            self.screen.blit(img_white_2, ((WIDTH/2)-(img_white_2.get_width()/2), HEIGHT-300))
+            img = self.font.render("[R]einiciar ou [S]air", True, C_WHITE)
+            self.screen.blit(img, (center_width-(img.get_width()/2), center_height-img.get_height()+100))

@@ -1,10 +1,18 @@
+from enum import Enum
 import pygame
+
+
+class EnumScenes(Enum):
+    main = 'main'
+    game_over = 'game_over'
+    menu = 'menu'
+    placar = 'placar'
 
 
 class GameLoop():
 
     in_game = True
-    scene = 'menu'
+    scene = EnumScenes.menu.value
 
     def handle_event(self, event):
         if event.type == pygame.QUIT:
