@@ -1,28 +1,57 @@
-from enum import Enum
 import pygame
 
 
-class EnumScenes(Enum):
-    main = 'main'
-    game_over = 'game_over'
-    menu = 'menu'
-    placar = 'placar'
-
-
 class GameLoop():
-
     in_game = True
-    scene = EnumScenes.menu.value
-
-    def handle_event(self, event):
-        if event.type == pygame.QUIT:
-           self.in_game = False
-        return True
+    pause = False
     
+    player = None
+    
+    scene = 'menu'
+    
+    points = 0
+
+    level = 1
+    limit = 2
+    velocity = 1
+    lifes = 6
+
+    letter_value = 1
+    
+    letters = []
+    explosions = []
+
+    combo = 0
+    ammo_error = 0
+
+    damage = 0
+    level_up = 0
+
+    def handle_event(self, events):
+        for event in events:
+            if event.type == pygame.QUIT:
+                self.quit()
+            
+            if event.type != pygame.KEYUP:
+                continue
+
+            if event.key == pygame.K_SPACE:
+                self.pause = not self.pause
+
     def quit(self):
         self.in_game = False
-        return True
-    
+
     def set_scene(self, scene):
         self.scene = scene
-        return True
+
+    def restart_game(self):
+        self.in_game = True
+        self.player = None
+        self.scene = 'menu'
+        self.lifes = 6
+        self.limit = 2
+        self.level = 1
+        self.points = 0
+        self.combo = 0
+        self.letters = []
+        self.explosions = []
