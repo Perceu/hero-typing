@@ -38,7 +38,6 @@ class LetterBox():
         self.surface = pygame.Surface((80,80), pygame.SRCALPHA)
         img = self.fonts['font_size_2'].render(chr(self.letter).upper(), True, self.color)
         if self.life_count > 1:
-            print('=====')
             for i in range(self.life_count-1):
                 pygame.draw.rect(self.surface, self.b_color, pygame.Rect(i+(i*8), i+(i*8), 80-(i*16), 80-(i*16)), 2)
 

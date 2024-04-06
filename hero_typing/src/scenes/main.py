@@ -112,7 +112,6 @@ class MainGame():
 
     def draw(self):
         self.screen.fill(C_BLACK)
-        print(self.game_loop.letters)
         if len(self.game_loop.letters) < self.game_loop.limit:
             if random.randbytes(1):
                 self.game_loop.letters.append(

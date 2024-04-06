@@ -48,17 +48,17 @@ class GameOver():
         img = self.fonts['font_size_2'].render("GAME OVER", True, C_RED)
         self.screen.blit(img, (center_width-(img.get_width()/2), center_height-img.get_height()))
         
-        img = self.fonts['font_size_2'].render("Pontuação", True, C_WHITE)
+        img = self.fonts['font_size_2'].render("Score", True, C_WHITE)
         self.screen.blit(img, (center_width-(img.get_width()/2), center_height-img.get_height()-150))
         
         img = self.fonts['font_size_2'].render(str(self.points).zfill(4), True, C_GREEN)
         self.screen.blit(img, (center_width-(img.get_width()/2), center_height-img.get_height()-100))
 
         if self.show_input:
-            img = self.fonts['font_size_2'].render("Digite seu nick:", True, C_WHITE)
+            img = self.fonts['font_size_2'].render("Player name:", True, C_WHITE)
             self.screen.blit(img, (center_width-(img.get_width()/2), center_height-img.get_height()+100))
             self.textinput.surface.get_width()
             self.screen.blit(self.textinput.surface, (center_width-(self.textinput.surface.get_width()/2), center_height-self.textinput.surface.get_height()+200))
         else:
-            img = self.fonts['font_size_2'].render("[R]einiciar ou [S]air", True, C_WHITE)
+            img = self.fonts['font_size_2'].render("[M]enu [S]air", True, C_WHITE)
             self.screen.blit(img, (center_width-(img.get_width()/2), center_height-img.get_height()+100))
