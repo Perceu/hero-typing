@@ -13,6 +13,10 @@ pip install -r requirements.txt
 ```
 
 # Hero Typing
+Jogo para melhorar a sua habilidade de digitação e ainda se divertir competindo com seus amigos vendo quem consegue chegar mais longe.
+
+![capa do jogo hero typing](/hero_typing/media/game_thumb.png)
+
 ```sh
 python hero_typing/run.py
 ```
