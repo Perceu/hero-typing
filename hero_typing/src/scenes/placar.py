@@ -1,5 +1,7 @@
 import pygame
 from settings import C_BLACK, C_WHITE, C_GREEN, WIDTH,HEIGHT
+from src.objects.board import Board
+
 
 def select_second_character(placar):
      return placar['placar']
@@ -10,6 +12,7 @@ class Placar():
         self.screen = screen
         self.fonts = fonts
         self.game_loop = game_loop
+        self.board = Board(self.screen, self.game_loop)
     
     def load(self):
         with open("placar.txt", 'r') as file:
@@ -37,12 +40,13 @@ class Placar():
         self.load()
         self.screen.fill(C_BLACK)
         center_width = WIDTH/2
-        center_height = HEIGHT/2
         
         img = self.fonts['font_size_2'].render("Score  Player", True, C_GREEN)       
-        self.screen.blit(img, (center_width-(img.get_width()/2), 10))
-
-
+        self.screen.blit(img, (center_width-(img.get_width()/2), 60))
+        
+        self.board.draw()
         for idx, placar in enumerate(self.placares):
-            img_white = self.fonts["font_size_2"].render(f"{str(placar['placar']).zfill(4)}   {placar['nome']}", True, C_WHITE)
-            self.screen.blit(img_white, (center_width-(img.get_width()/2), (35+((idx+1)*40))))
+            if idx > 14:
+                continue
+            img_white = self.fonts["font_size_2"].render(f"{str(idx+1).zfill(2)}   {str(placar['placar']).zfill(4)}   {placar['nome']}", True, C_WHITE)
+            self.screen.blit(img_white, (500, (80+((idx+1)*40))))

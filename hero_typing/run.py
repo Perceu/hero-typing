@@ -48,6 +48,7 @@ while game_loop.in_game:
             placar.draw()
         case EnumScenes.credits.value:
             credits.handle_event(events)
+            credits.update()
             credits.draw()
     
     pygame.display.update()

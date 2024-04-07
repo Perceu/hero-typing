@@ -10,6 +10,7 @@ class GameLoop():
     scene = 'menu'
     
     points = 0
+    errors = 0
 
     level = 1
     limit = 2
@@ -20,12 +21,14 @@ class GameLoop():
     
     letters = []
     explosions = []
+    bullets = []
 
     combo = 0
     ammo_error = 0
 
     damage = 0
     level_up = 0
+    screen_shake = 0
 
     def handle_event(self, events):
         for event in events:
@@ -53,5 +56,9 @@ class GameLoop():
         self.level = 1
         self.points = 0
         self.combo = 0
+        self.damage = 0
+        self.screen_shake = 0
+        self.level_up = 0
         self.letters = []
         self.explosions = []
+        self.bullets = []

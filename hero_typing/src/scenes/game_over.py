@@ -3,6 +3,7 @@ from pygame_textinput import TextInputVisualizer
 from settings import WIDTH, HEIGHT, C_BLACK, C_GREEN, C_WHITE, C_RED
 from faker import Faker
 
+
 class GameOver(): 
 
     def __init__(self, screen, game_loop, fonts) -> None:
@@ -36,7 +37,7 @@ class GameOver():
                     file.write(f"{self.textinput.value};{self.points}\n")
             elif event.key == pygame.K_s and not self.show_input:
                 self.game_loop.quit()
-            elif event.key == pygame.K_r and not self.show_input:
+            elif event.key == pygame.K_m and not self.show_input:
                 self.game_loop.restart_game()
 
     def draw(self):
