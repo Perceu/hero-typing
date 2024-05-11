@@ -9,7 +9,7 @@ from src.objects.points import Points
 from src.objects.level import Level
 from src.objects.board import Board
 from src.objects.infobox import Infobox
-from src.objects.bullet import Bullet
+from src.objects.bullet import Bullet, Bullet2, Bullet3
 
 def get_valid_letter(game_loop):
     sort_letter = True
@@ -33,10 +33,11 @@ class MainGame():
     render_offset = [0,0]
     screen_shake = 0
 
-    def __init__(self, screen, game_loop, fonts) -> None:
+    def __init__(self, screen, game_loop, fonts, sounds) -> None:
         self.screen = screen
         self.game_loop = game_loop
         self.fonts = fonts
+        self.sounds = sounds
         self.life_bar = Lifes(screen, self.game_loop)
         self.points = Points(self.screen, self.game_loop, self.fonts)
         self.level = Level(self.screen, self.game_loop, self.fonts)
@@ -53,9 +54,20 @@ class MainGame():
             if not self.game_loop.pause:
                 for letter in self.game_loop.letters:
                     if event.key == letter.letter:
-                        self.game_loop.bullets.append(
-                            Bullet(self.screen, self.game_loop, letter.rect.x)
-                        )
+                        if self.game_loop.combo > 20:
+                            self.game_loop.bullets.append(
+                                Bullet3(self.screen, self.game_loop, letter.rect.x, self.sounds)
+                            )
+                        elif self.game_loop.combo > 10:
+                            self.game_loop.bullets.append(
+                                Bullet2(self.screen, self.game_loop, letter.rect.x, self.sounds)
+                            )
+                        else:
+                            self.game_loop.bullets.append(
+                                Bullet(self.screen, self.game_loop, letter.rect.x, self.sounds)
+                            )
+                        self.sounds[0].set_volume(0.5)
+                        pygame.mixer.Sound.play(self.sounds[0])
                         break
 
     def update(self):
@@ -115,6 +127,7 @@ class MainGame():
                 self.game_loop.explosions.append(
                     Explosion(self.screen, (letter.rect.x, letter.rect.y))
                 )
+                pygame.mixer.Sound.play(self.sounds[1])
                 self.game_loop.letters.pop(index)
                 self.game_loop.points += self.game_loop.letter_value
                 self.game_loop.screen_shake = 9

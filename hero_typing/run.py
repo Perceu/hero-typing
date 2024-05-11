@@ -1,4 +1,5 @@
 import pygame
+from pathlib import Path
 from settings import HEIGHT, WIDTH
 from game_loop import GameLoop
 from src.objects.fonts import load_fonts
@@ -19,13 +20,22 @@ clock = pygame.time.Clock()
 fonts = load_fonts()
 game_loop = GameLoop()
 
+shot = pygame.mixer.Sound(Path.cwd().joinpath('hero_typing/media/shot.mp3'))
+explosion = pygame.mixer.Sound(Path.cwd().joinpath('hero_typing/media/explosion.mp3'))
+
 game_menu = Menu(screen, game_loop, fonts)
 game_over = GameOver(screen, game_loop, fonts)
-main_game = MainGame(screen, game_loop, fonts)
+main_game = MainGame(screen, game_loop, fonts, (shot, explosion))
 placar = Placar(screen, game_loop, fonts)
 credits = Credits(screen, game_loop, fonts)
 
 pygame.display.toggle_fullscreen()
+
+pygame.mixer.music.load(Path.cwd().joinpath('hero_typing/media/background.mp3'))
+pygame.mixer.music.set_volume(0.1)
+pygame.mixer.music.play(-1)
+
+
 while game_loop.in_game:
     clock.tick(45)
     events = pygame.event.get()
