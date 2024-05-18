@@ -41,7 +41,7 @@ class Placar():
         self.screen.fill(C_BLACK)
         center_width = WIDTH/2
         
-        img = self.fonts['font_size_2'].render("Score  Player", True, C_GREEN)       
+        img = self.fonts['font_size_2'].render("Score  Player", True, C_GREEN)
         self.screen.blit(img, (center_width-(img.get_width()/2), 60))
         
         self.board.draw()

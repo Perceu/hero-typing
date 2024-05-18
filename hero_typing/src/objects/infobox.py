@@ -16,7 +16,7 @@ class Infobox():
 
         img = self.fonts['font_size_2'].render("Error:", True, C_RED)
         self.screen.blit(img, (WIDTH-280, 180))
-        img = self.fonts['font_size_2'].render(str(self.game_loop.ammo_error).zfill(4), True, C_WHITE)
+        img = self.fonts['font_size_2'].render(str(self.game_loop.errors).zfill(4), True, C_WHITE)
         self.screen.blit(img, (WIDTH-280, 220))
         
         if self.game_loop.pause:

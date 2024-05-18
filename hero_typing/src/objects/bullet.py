@@ -29,7 +29,7 @@ class Bullet():
                 pygame.mixer.Sound.play(self.sounds[1])
                 if letter.life_count <= 0:
                     self.game_loop.letters.pop(index)
-                    self.game_loop.points += self.game_loop.letter_value
+                    self.game_loop.points += letter.points
                 break
         
         if self.rect.y <= 0:
@@ -67,7 +67,7 @@ class Bullet2():
                 pygame.mixer.Sound.play(self.sounds[1])
                 if letter.life_count <= 0:
                     self.game_loop.letters.pop(index)
-                    self.game_loop.points += self.game_loop.letter_value
+                    self.game_loop.points += letter.points
                 break
         
         if self.rect.y <= 0:
@@ -108,7 +108,7 @@ class Bullet3():
                 pygame.mixer.Sound.play(self.sounds[1])
                 if letter.life_count <= 0:
                     self.game_loop.letters.pop(index)
-                    self.game_loop.points += self.game_loop.letter_value
+                    self.game_loop.points += letter.points
                 break
         
         if self.rect.y <= 0:

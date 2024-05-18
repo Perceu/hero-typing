@@ -10,6 +10,7 @@ class Menu:
         {'text': 'Iniciar', 'active': True, 'scene': 'main'},
         {'text': 'Placar', 'active': False, 'scene': 'placar'},
         {'text': 'Creditos', 'active': False, 'scene': 'credits'},
+        {'text': 'Options', 'active': False, 'scene': 'options'},
         {'text': 'Sair', 'active': False, 'scene': 'quit'},
     ]
 
@@ -39,8 +40,8 @@ class Menu:
                     for idx, menu in enumerate(self.menu_itens):
                         if menu['active']:
                             self.menu_itens[idx]['active'] = False
-                            self.menu_itens[(idx+1)%4]['active'] = True
-                            self.active_menu = self.menu_itens[(idx+1)%4]
+                            self.menu_itens[(idx+1)%len(self.menu_itens)]['active'] = True
+                            self.active_menu = self.menu_itens[(idx+1)%len(self.menu_itens)]
                             break
 
     def draw(self):

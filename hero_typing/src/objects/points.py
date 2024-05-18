@@ -11,9 +11,9 @@ class Points():
     def draw(self):
         point = self.game_loop.points
         rect = pygame.Rect(0,0, WIDTH, 50)
-        img = self.fonts['font_size_3'].render(
+        img = self.fonts['font_size_2'].render(
             str(point).zfill(5), True, C_YELLOW
         )
         final_w = (WIDTH/2) - (img.get_width()/2)
         pygame.draw.rect(self.screen, C_BLACK, rect)
-        self.screen.blit(img, (final_w, 60))
+        self.screen.blit(img, (final_w, 5))

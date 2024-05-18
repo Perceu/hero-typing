@@ -4,31 +4,25 @@ import pygame
 class GameLoop():
     in_game = True
     pause = False
-    
     player = None
-    
-    scene = 'menu'
-    
+    scene = 'menu'  
     points = 0
     errors = 0
-
     level = 1
     limit = 2
     velocity = 1
     lifes = 6
-
-    letter_value = 1
-    
     letters = []
     explosions = []
     bullets = []
-
     combo = 0
-    ammo_error = 0
-
     damage = 0
     level_up = 0
     screen_shake = 0
+    bonus = ['0','1','2','3','4','5','6','7','8','9']
+    level_1 = ['a','s','d','f','g','h','j','k','l']
+    level_2 = level_1+['q','w','e','r','t','y','u','i','o','p']
+    level_3 = level_2+['z','x','c','v','b','n','m']
 
     def handle_event(self, events):
         for event in events:

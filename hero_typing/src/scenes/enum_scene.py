@@ -6,4 +6,5 @@ class EnumScenes(Enum):
     game_over = 'game_over'
     menu = 'menu'
     placar = 'placar'
+    options = 'options'
     credits = 'credits'

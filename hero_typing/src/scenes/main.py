@@ -11,9 +11,10 @@ from src.objects.board import Board
 from src.objects.infobox import Infobox
 from src.objects.bullet import Bullet, Bullet2, Bullet3
 
-def get_valid_letter(game_loop):
+
+def get_valid_letter(game_loop, level_array):
     sort_letter = True
-    temp_ord = random.randint(97,122)
+    temp_ord = random.choice(level_array)
     while sort_letter:
         match_letter = False
         for letter in game_loop.letters:
@@ -23,7 +24,7 @@ def get_valid_letter(game_loop):
         if not match_letter:
             sort_letter = False
             continue
-        temp_ord = random.randint(97,122)
+        temp_ord = random.choice(level_array)
 
     return temp_ord
 
@@ -53,7 +54,7 @@ class MainGame():
                 self.game_loop.set_scene(EnumScenes.menu.value)
             if not self.game_loop.pause:
                 for letter in self.game_loop.letters:
-                    if event.key == letter.letter:
+                    if chr(event.key) == letter.letter:
                         if self.game_loop.combo > 20:
                             self.game_loop.bullets.append(
                                 Bullet3(self.screen, self.game_loop, letter.rect.x, self.sounds)
@@ -66,7 +67,7 @@ class MainGame():
                             self.game_loop.bullets.append(
                                 Bullet(self.screen, self.game_loop, letter.rect.x, self.sounds)
                             )
-                        self.sounds[0].set_volume(0.5)
+                        self.sounds[0].set_volume(random.uniform(0.2, 0.7))
                         pygame.mixer.Sound.play(self.sounds[0])
                         break
 
@@ -74,42 +75,30 @@ class MainGame():
         if self.game_loop.lifes <= 0:
             self.game_loop.set_scene(EnumScenes.game_over.value)
 
-        if self.game_loop.points > 10 and self.game_loop.points%10 == 0 and self.game_loop.points < 100:
-            self.game_loop.limit = self.game_loop.points/10
-
         if self.game_loop.points > 50 and self.game_loop.points%50 == 0:
-            self.game_loop.level_up = 10
+            self.game_loop.level_up = 8
             self.game_loop.level = int(self.game_loop.points/50)
 
         match self.game_loop.level:
             case 2:
-                self.game_loop.limit = 4
-                self.game_loop.velocity = 2
+                self.game_loop.limit = 3
             case 3:
-                self.game_loop.limit = 6
-                self.game_loop.velocity = 2
-            case 4:
-                self.game_loop.limit = 8
-                self.game_loop.velocity = 2
-            case 5:
-                self.game_loop.limit = 10
-                self.game_loop.velocity = 2
-            case 6:
                 self.game_loop.limit = 4
-                self.game_loop.velocity = 3
+            case 4:
+                self.game_loop.limit = 4
+            case 5:
+                self.game_loop.limit = 5
+            case 6:
+                self.game_loop.limit = 5
             case 7:
                 self.game_loop.limit = 6
-                self.game_loop.velocity = 3
             case 8:
-                self.game_loop.limit = 8
-                self.game_loop.velocity = 3
+                self.game_loop.limit = 7
             case 9:
-                self.game_loop.limit = 10
-                self.game_loop.velocity = 3
+                self.game_loop.limit = 7
         
         if self.game_loop.level > 10:
-            self.game_loop.limit = 12
-            self.game_loop.velocity = 4
+            self.game_loop.limit = 8
 
         for index, bullet in enumerate(self.game_loop.bullets):
             if bullet.delete:
@@ -119,17 +108,18 @@ class MainGame():
 
         if self.game_loop.errors >= 10:
             self.game_loop.errors = 0
+            self.game_loop.screen_shake = 9
+            self.game_loop.damage = 9
             self.life_bar.substract_lifes()
 
         for index, letter in enumerate(self.game_loop.letters):
             letter.update()
-            if letter.rect.y > (HEIGHT-250):
+            if letter.rect.y > (HEIGHT-150):
                 self.game_loop.explosions.append(
                     Explosion(self.screen, (letter.rect.x, letter.rect.y))
                 )
-                pygame.mixer.Sound.play(self.sounds[1])
+                pygame.mixer.Sound.play(self.sounds[1], fade_ms=5)
                 self.game_loop.letters.pop(index)
-                self.game_loop.points += self.game_loop.letter_value
                 self.game_loop.screen_shake = 9
                 self.game_loop.damage = 9
                 self.life_bar.substract_lifes()
@@ -139,9 +129,16 @@ class MainGame():
         self.screen.fill(C_BLACK)
         if len(self.game_loop.letters) < self.game_loop.limit:
             if random.randint(0,1):
+                if self.game_loop.level < 4:
+                    letter_val = get_valid_letter(self.game_loop, self.game_loop.level_1)
+                elif self.game_loop.level < 7:
+                    letter_val = get_valid_letter(self.game_loop, self.game_loop.level_2)
+                else:
+                    letter_val = get_valid_letter(self.game_loop, self.game_loop.level_3)
+
                 self.game_loop.letters.append(
                     LetterBox(
-                        self.screen, self.game_loop, self.fonts, get_valid_letter(self.game_loop)
+                        self.screen, self.game_loop, self.fonts, letter_val
                     )
                 )
         
@@ -158,8 +155,8 @@ class MainGame():
 
         if self.game_loop.screen_shake > 0:
             self.game_loop.screen_shake -= 1
-            self.render_offset[0] = random.randint(0,8) -4
-            self.render_offset[0] = random.randint(0,8) -4
+            self.render_offset[0] = random.randint(0,9) -4
+            self.render_offset[0] = random.randint(0,9) -4
         else:
             self.render_offset[0] = 0
             self.render_offset[0] = 0

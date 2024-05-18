@@ -23,7 +23,7 @@ class Level():
         img_temp = self.fonts['font_size_2'].render(
             f"Level: {str(level).zfill(3)}", True, C_RED
         )
-        img = self.fonts['font_size_4'].render('+1', True, C_RED)
+        img = self.fonts['font_size_4'].render('Level Up', True, C_RED)
 
         altura_inicial = (HEIGHT/2)-img.get_height()/2
         largura_inicial = (WIDTH/2)-img.get_width()/2
