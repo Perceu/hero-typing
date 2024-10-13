@@ -75,30 +75,45 @@ class MainGame():
         if self.game_loop.lifes <= 0:
             self.game_loop.set_scene(EnumScenes.game_over.value)
 
-        if self.game_loop.points > 50 and self.game_loop.points%50 == 0:
+        if self.game_loop.points == 10:
             self.game_loop.level_up = 8
-            self.game_loop.level = int(self.game_loop.points/50)
+            self.game_loop.level = 2
+            self.game_loop.limit = 3
 
-        match self.game_loop.level:
-            case 2:
-                self.game_loop.limit = 3
-            case 3:
-                self.game_loop.limit = 4
-            case 4:
-                self.game_loop.limit = 4
-            case 5:
-                self.game_loop.limit = 5
-            case 6:
-                self.game_loop.limit = 5
-            case 7:
-                self.game_loop.limit = 6
-            case 8:
-                self.game_loop.limit = 7
-            case 9:
-                self.game_loop.limit = 7
-        
-        if self.game_loop.level > 10:
-            self.game_loop.limit = 8
+        if self.game_loop.points == 20:
+            self.game_loop.level_up = 8
+            self.game_loop.level = 3
+            self.game_loop.limit = 3
+
+        if self.game_loop.points == 30:
+            self.game_loop.level_up = 8
+            self.game_loop.level = 4
+            self.game_loop.limit = 4
+
+        if self.game_loop.points == 50:
+            self.game_loop.level_up = 8
+            self.game_loop.level = 5
+            self.game_loop.limit = 4
+
+        if self.game_loop.points == 80:
+            self.game_loop.level_up = 8
+            self.game_loop.level = 6
+            self.game_loop.limit = 5
+
+        if self.game_loop.points == 130:
+            self.game_loop.level_up = 8
+            self.game_loop.level = 7
+            self.game_loop.limit = 5
+
+        if self.game_loop.points == 210:
+            self.game_loop.level_up = 8
+            self.game_loop.level = 8
+            self.game_loop.limit = 6
+
+        if self.game_loop.points == 340:
+            self.game_loop.level_up = 8
+            self.game_loop.level = 9
+            self.game_loop.limit = 6
 
         for index, bullet in enumerate(self.game_loop.bullets):
             if bullet.delete:
@@ -141,7 +156,7 @@ class MainGame():
                         self.screen, self.game_loop, self.fonts, letter_val
                     )
                 )
-        
+
         for letter in self.game_loop.letters:
             letter.draw()
 
@@ -162,11 +177,11 @@ class MainGame():
             self.render_offset[0] = 0
 
         self.screen.blit(
-            pygame.transform.scale(self.screen, (WIDTH, HEIGHT)), 
+            pygame.transform.scale(self.screen, (WIDTH, HEIGHT)),
             self.render_offset
         )
         self.points.draw()
-        
+
         if self.game_loop.level_up > 0:
             self.level.level_up()
 

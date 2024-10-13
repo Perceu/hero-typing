@@ -2,7 +2,7 @@
 
 Repositorio para desenvolvimento de jogos casuais em pygame para brincar e testar algoritmos.
 
-Aceitando ajuda. 
+Aceitando ajuda.
 
 Feitos na loucura por diversão.
 
@@ -18,5 +18,5 @@ Jogo para melhorar a sua habilidade de digitação e ainda se divertir competind
 ![capa do jogo hero typing](/hero_typing/media/game_thumb.png)
 
 ```sh
-python hero_typing/run.py
+python hero_typing/main.py
 ```

@@ -22,14 +22,13 @@ class LetterBox():
         self.rect = self.surface.get_rect()
         self.rect.x = random.choice(x_positions)
 
-        if self.game_loop.level > 1 and self.game_loop.level < 4:
+        if self.game_loop.level > 1 and self.game_loop.level < 3:
             self.velocity = random.randint(1, 2)
             if self.velocity == 2:
                 self.color = C_YELLOW
-        
-        if self.game_loop.level > 3 and self.game_loop.level < 7:
+
+        if self.game_loop.level > 3 and self.game_loop.level < 6:
             self.velocity = random.randint(1, 2)
-            self.life_count = random.randint(1, 2)
             if self.velocity == 2:
                 self.color = C_YELLOW
             if self.velocity == 3:
@@ -38,14 +37,6 @@ class LetterBox():
         if self.game_loop.level > 6 and self.game_loop.level < 9:
             self.velocity = random.randint(1, 3)
             self.life_count = random.randint(1, 2)
-            if self.velocity == 2:
-                self.color = C_YELLOW
-            if self.velocity == 3:
-                self.color = C_RED
-        
-        if self.game_loop.level > 8 and self.game_loop.level < 10:
-            self.velocity = random.randint(1, 3)
-            self.life_count = random.randint(1, 3)
             if self.velocity == 2:
                 self.color = C_YELLOW
             if self.velocity == 3:
@@ -64,12 +55,9 @@ class LetterBox():
     def get_surface(self):
         self.surface = pygame.Surface((80,80), pygame.SRCALPHA)
         img = self.fonts['font_size_2'].render(self.letter.upper(), True, self.color)
-        if self.life_count > 2:
+        if self.life_count > 1:
             for i in range(1, self.life_count):
-                pygame.draw.rect(self.surface, self.color, pygame.Rect(i+(i*8), i+(i*8), 80-(i*16), 80-(i*16)), 2)
-        else:
-            for i in range(1, self.life_count):
-                pygame.draw.rect(self.surface, self.color, pygame.Rect(i+(i*16), i+(i*16), 80-(i*32), 80-(i*32)), 2)
+                pygame.draw.line(self.surface, self.color, (0 , 65+(i*3)), (80, 65+(i*3)), 1)
 
         self.surface.blit(img, (31,14))
         return self.surface
@@ -105,9 +93,9 @@ class LetterBox():
                     self.moveLeft(2)
                 if random.randint(0,1):
                     self.moveRight(2)
-        else: 
+        else:
             self.moveDown(self.velocity)
-    
+
     def draw(self):
         self.colide = False
         self.screen.blit(

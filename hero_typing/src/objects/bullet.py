@@ -5,7 +5,7 @@ from random import randint
 
 class Bullet():
 
-    dest_y = HEIGHT-249
+    dest_y = HEIGHT-110
     delete = False
 
     def __init__(self, screen, game_loop,  x, sounds) -> None:
@@ -31,7 +31,7 @@ class Bullet():
                     self.game_loop.letters.pop(index)
                     self.game_loop.points += letter.points
                 break
-        
+
         if self.rect.y <= 0:
             self.game_loop.combo=0
             self.game_loop.errors+=1
@@ -42,7 +42,7 @@ class Bullet():
 
 class Bullet2():
 
-    dest_y = HEIGHT-249
+    dest_y = HEIGHT-110
     delete = False
 
     def __init__(self, screen, game_loop,  x, sounds) -> None:
@@ -69,7 +69,7 @@ class Bullet2():
                     self.game_loop.letters.pop(index)
                     self.game_loop.points += letter.points
                 break
-        
+
         if self.rect.y <= 0:
             self.game_loop.combo=0
             self.game_loop.errors+=1
@@ -82,7 +82,7 @@ class Bullet2():
 
 class Bullet3():
 
-    dest_y = HEIGHT-249
+    dest_y = HEIGHT-110
     delete = False
 
     def __init__(self, screen, game_loop,  x, sounds) -> None:
@@ -110,7 +110,7 @@ class Bullet3():
                     self.game_loop.letters.pop(index)
                     self.game_loop.points += letter.points
                 break
-        
+
         if self.rect.y <= 0:
             self.game_loop.combo=0
             self.game_loop.errors+=1
